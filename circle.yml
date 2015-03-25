@@ -1,0 +1,13 @@
+machine:
+  services:
+  
+
+
+
+deployment:
+  hub:
+    branch: master
+    commands:
+
+      - mvn appengine:update
+      
