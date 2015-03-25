@@ -62,7 +62,7 @@
                     greeting.getProperty("content"));
             String author;
             if (greeting.getProperty("author_email") == null) {
-                author = "An anonymous person";
+                author = "An ahmad person";
             } else {
                 author = (String)greeting.getProperty("author_email");
                 String author_id = (String)greeting.getProperty("author_id");
