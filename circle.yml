@@ -11,5 +11,5 @@ deployment:
   appengine:
     branch: master
     commands:
-      - echo $APPENGINE_PASSWORD | $HOME/appengine-java-sdk/bin/appcfg.sh update --email=$APPENGINE_EMAIL --passin . 
+      - echo $APPENGINE_PASSWORD | bash $HOME/appengine-java-sdk/bin/appcfg.sh update --email=$APPENGINE_EMAIL --passin . 
 
