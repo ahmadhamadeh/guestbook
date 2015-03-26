@@ -1,17 +1,23 @@
 machine:
   services:
-  
-dependencies:
-  pre:
-    - curl -o $HOME/appengine-java-sdk-1.9.18.zip https://storage.googleapis.com/appengine-sdks/featured/appengine-java-sdk-1.9.18.zip
-    - unzip -q -d $HOME $HOME/appengine-java-sdk-1.9.18.zip
+    - docker
 
+dependencies:
+  cache_directories:
+    - ~/kubernetes
+  pre:
+    - ./ensure-kubernetes-installed.sh
+    - docker build -t $EXTERNAL_REGISTRY_ENDPOINT/hello:$CIRCLE_SHA1 .
+
+test:
+  post:
+    - docker run -d -p 3000:3000 -e "SECRET_KEY_BASE=abcd1234" $EXTERNAL_REGISTRY_ENDPOINT/hello:$CIRCLE_SHA1; sleep 10
+    - curl --retry 10 --retry-delay 5 -v http://localhost:3000
 
 deployment:
-  appengine:
+  prod:
     branch: master
     commands:
-      - ls $HOME
-      - pwd 	
-      - echo $APPENGINE_PASSWORD | bash $HOME/appengine-java-sdk-1.9.18/bin/appcfg.sh --email=$APPENGINE_EMAIL --passin update  ./target/guestbook-1.0-SNAPSHOT 
-
+      - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS $EXTERNAL_REGISTRY_ENDPOINT
+      - envsubst < .kubernetes_auth.template > ~/.kubernetes_auth
+      - ./deploy.sh
