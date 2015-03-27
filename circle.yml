@@ -7,7 +7,7 @@ dependencies:
     - unzip -q -d $HOME $HOME/appengine-java-sdk-1.9.18.zip
 
 deployment:
-
+  appengine:  
     branch: master
     commands:
       - ls $HOME
