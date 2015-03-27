@@ -12,6 +12,4 @@ deployment:
     commands:
       - ls $HOME
       - pwd 	
-      - echo $APPENGINE_PASSWORD | bash $HOME/appengine-java-sdk-1.9.18/bin/appcfg.sh --email=$APPENGINE_EMAIL --passin update  ./target/guestbook-1.0-SNAPSHOT 
-
-			
+      - echo $APPENGINE_PASSWORD | bash $HOME/appengine-java-sdk-1.9.18/bin/appcfg.sh --email=$APPENGINE_EMAIL --passin update  ./target/guestbook-1.0-SNAPSHOT
