@@ -18,4 +18,3 @@ deployment:
 
       - docker login -e $ahmad.hamadeh@accenture.com -u ahmadhamadeh -p $DOCKER_PASS
       - docker push ahmadhamadeh/adriano
-      -
