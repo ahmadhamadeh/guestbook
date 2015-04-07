@@ -1,15 +1,21 @@
 machine:
   services:
+    - docker
+    - couchdb
 
 dependencies:
+  override:
   pre:
-    - curl -o $HOME/appengine-java-sdk-1.9.18.zip https://storage.googleapis.com/appengine-sdks/featured/appengine-java-sdk-1.9.18.zip
-    - unzip -q -d $HOME $HOME/appengine-java-sdk-1.9.18.zip
+  - mvn clean install
+  post:
+  - docker build -t ahmadhamadeh/adriano .
+
 
 deployment:
-  appengine:  
+  production:
     branch: master
     commands:
-      - ls $HOME
-      - pwd 	
-      - echo $APPENGINE_PASSWORD | bash $HOME/appengine-java-sdk-1.9.18/bin/appcfg.sh --email=$APPENGINE_EMAIL --passin update  ./target/guestbook-1.0-SNAPSHOT
+
+      - docker login -e $ahmad.hamadeh@accenture.com -u ahmadhamadeh -p $DOCKER_PASS
+      - docker push ahmadhamadeh/adriano
+      -
