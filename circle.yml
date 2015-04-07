@@ -2,9 +2,6 @@ machine:
   services:
 
 dependencies:
-  pre:
-    - curl -o $HOME/appengine-java-sdk-1.9.18.zip https://storage.googleapis.com/appengine-sdks/featured/appengine-java-sdk-1.9.18.zip
-    - unzip -q -d $HOME $HOME/appengine-java-sdk-1.9.18.zip
 
 deployment:
   appengine:  
