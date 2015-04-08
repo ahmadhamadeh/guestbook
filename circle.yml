@@ -6,6 +6,7 @@ machine:
 dependencies:
   override:
   pre:
+  - apt-get update; apt-get install chef
   - mvn clean install
   post:
   - docker build -t ahmadhamadeh/adriano .
@@ -18,3 +19,4 @@ deployment:
 
       - docker login -e $ahmad.hamadeh@accenture.com -u ahmadhamadeh -p $DOCKER_PASS
       - docker push ahmadhamadeh/adriano
+      - cd chef-repo; knife ssh "role:app" "sudo chef-client" -x hamadeh1985 -i ~/chef-repo/chef -a ipadr
