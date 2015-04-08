@@ -6,7 +6,7 @@ machine:
 dependencies:
   override:
   pre:
-  - apt-get update; apt-get install chef
+  - sudo apt-get update; sudo apt-get install chef
   - mvn clean install
   post:
   - docker build -t ahmadhamadeh/adriano .
