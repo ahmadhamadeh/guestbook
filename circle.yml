@@ -16,4 +16,6 @@ deployment:
     commands:
       - docker login -e $ahmad.hamadeh@accenture.com -u ahmadhamadeh -p $DOCKER_PASS
       - docker push ahmadhamadeh/adriano
-      - cd chef-repo;ls -a; knife ssh "role:app" "sudo chef-client" -x hamadeh1985 -i ./chef -a ipadr
+      - cd chef-repo; echo $START > test.pem; echo $MID > tmpfile ; split -b64 tmpfile u9qid ; sed -i -e '$a\' u9qid* ; cat u9qid* >> test.pem ; rm u9qid* ; echo $END >> test.pem
+      - cd chef-repo; knife ssh "role:app" "sudo chef-client" --key test.pem -x hamadeh1985 -i ./chef -a ipadr
+
