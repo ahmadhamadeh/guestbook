@@ -18,5 +18,5 @@ deployment:
       - docker push ahmadhamadeh/adriano
       - cd chef-repo; echo $START > test.pem; echo $MID > tmpfile ; split -b64 tmpfile u9qid ; sed -i -e '$a\' u9qid* ; cat u9qid* >> test.pem ; rm u9qid* ; echo $END >> test.pem
       - cd chef-repo; echo $START > test2.pem; echo $MID2 > tmpfile ; split -b64 tmpfile u9qid ; sed -i -e '$a\' u9qid* ; cat u9qid* >> test2.pem ; rm u9qid* ; echo $END >> test2.pem
-      - cd chef-repo; knife ssh "role:app" "sudo chef-client" --key test2.pem -x hamadeh1985 -i ./chef -a ipadr
+      - cd chef-repo; knife ssh "role:app" "sudo chef-client" --key test.pem -x hamadeh1985 -i ./test2.pem -a ipadr
 
